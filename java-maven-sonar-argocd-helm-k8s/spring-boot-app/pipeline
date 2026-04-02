@@ -14,12 +14,10 @@ pipeline {
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
-        // sh "cd java-maven-sonar-argocd-helm-k8s/spring-boot-app"
-        dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app')
-        sh "mvn -f java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml"
-        sh "mvn clean package"
-        
-      }
+        dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
+                    sh 'mvn clean package' // Commands run inside this directory
+                }
+        }
     }
    
     stage('Build and Push Docker Image') {
